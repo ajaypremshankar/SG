@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+
+    <!-- sample tiles definitions
+    <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
+        <put name="title"  value="Sample Page Title" />
+        <put name="header" value="/common/header.jsp" />
+        <put name="menu"   value=".mainMenu" />
+        <put name="footer" value="/common/footer.jsp" />
+        <put name="body"   value=".portal.body" />
+    </definition>
+
+    <definition name=".mainMenu" path="/common/layouts/vboxLayout.jsp" >
+        <putList name="list" >
+            <add value=".menu.links" />
+            <add value=".menu.taglib.references" />
+            <add value=".menu.printer.friendly" />
+            <add value=".menu.old.documents" />
+      </putList>
+    </definition>
+
+    <definition name="aPage" extends=".mainLayout">
+        <put name="title"  value="Another Title" />
+        <put name="body"   value=".aPage.body" />
+    </definition>
+
+    end samples -->
+
+        <!-- Landing Page -->
+        <definition name="tiles.landing" path="/landing_frame.jsp">
+         <put name="title" value="HOME--SchoolsGlobal.com" />
+        <put name="header" value="/cover.jsp" />
+        <put name="user_type" value="/user_type.jsp" />
+        <put name="menu" value="/menu_NonLogin.jsp" />
+        <put name="right_body" value="/landing_body.jsp" />
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+
+        <!-- Registration Page Page -->
+        <definition name="tiles.registration" path="/landing_frame.jsp">
+         <put name="title" value="HOME--SchoolsGlobal.com" />
+        <put name="header" value="/cover.jsp" />
+        <put name="user_type" value="/user_type.jsp" />
+        <put name="menu" value="/menu_NonLogin.jsp" />
+        <put name="right_body" value="/main_registration.jsp" />
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+
+        <!-- Login Page -->
+        <definition name="tiles.login" extends="tiles.landing">
+            <put name="user_type" value="/blank_user_type.jsp" />
+            <put name="right_body" value="/user_login.jsp" />
+        </definition>
+
+        <!--Student Initial page -->
+        <definition name="tiles.student_initial_page" path="/user_init_frame.jsp">
+        <put name="body" value="/Student/student_init.jsp" />
+        <put name="footer" value="/footer.jsp" />
+
+        </definition>
+
+        <!-- Teacher Initial Page -->
+        <definition name="tiles.teacher_initial_page" extends="tiles.student_initial_page">
+            <put name="body" value="/Teacher/teacher_init.jsp" />
+        </definition>
+
+        <!-- Teacher Initial Page -->
+        <definition name="tiles.parent_initial_page" extends="tiles.student_initial_page">
+            <put name="body" value="/Parent/parent_init.jsp" />
+        </definition>
+
+
+
+
+        <!--User Home page -->
+        <definition name="tiles.user_home" path="/user_home_frame.jsp">
+        <put name="cover" value="tiles.user_cover" />
+        <put name="navigation" value="/user_navigation.jsp" />
+        <put name="menu" value="/menu_login.jsp" />
+        
+        <put name="footer" value="/footer.jsp" />
+        
+        </definition>
+
+        <definition name="tiles.user_cover" path="/user_cover.jsp">
+            <put name="user_about" value="/Student/student_detail.jsp" />
+        </definition>
+
+
+        <!--Student Home page -->
+        <definition name="tiles.student_home" path="/user_home_frame.jsp">
+        <put name="cover" value="tiles.student_cover" />
+        <put name="navigation" value="/user_navigation.jsp" />
+        <put name="menu" value="/menu_login.jsp" />
+        <put name="body" value="/user_body.jsp" />
+        
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+        <definition name="tiles.student_cover" path="/user_cover.jsp">
+            <put name="user_about" value="/Student/student_detail.jsp" />
+        </definition>
+        
+        
+        <!--Teacher Home page -->
+        <definition name="tiles.teacher_home" path="/user_home_frame.jsp">
+        <put name="cover" value="tiles.teacher_cover" />
+        <put name="navigation" value="/user_navigation.jsp" />
+        <put name="menu" value="/menu_login.jsp" />
+        <put name="body" value="/user_body.jsp" />
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+        <definition name="tiles.teacher_cover" path="/user_cover.jsp">
+            <put name="user_about" value="/Teacher/teacher_detail.jsp" />
+        </definition>
+
+
+        <!--Parent Home page -->
+        <definition name="tiles.parent_home" path="/user_home_frame.jsp">
+        <put name="cover" value="tiles.parent_cover" />
+        <put name="navigation" value="/user_navigation.jsp" />
+        <put name="menu" value="/menu_login.jsp" />
+        <put name="body" value="/user_body.jsp" />
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+        <definition name="tiles.parent_cover" path="/user_cover.jsp">
+            <put name="user_about" value="/Parent/parent_detail.jsp" />
+        </definition>
+
+
+
+        <!--Student Profile page -->
+        <definition name="tiles.student_profile" path="/user_home_frame.jsp">
+        <put name="cover" value="tiles.student_cover" />
+        <put name="navigation" value="/user_navigation.jsp" />
+        <put name="menu" value="/menu_login.jsp" />
+        <put name="body" value="/Student/student_profile.jsp" />
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+
+        <!--Teacher Profile page -->
+        <definition name="tiles.teacher_profile" path="/user_home_frame.jsp">
+        <put name="cover" value="tiles.teacher_cover" />
+        <put name="navigation" value="/user_navigation.jsp" />
+        <put name="menu" value="/menu_login.jsp" />
+        <put name="body" value="/Teacher/teacher_profile.jsp" />
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+
+
+        <!--parent Profile page -->
+        <definition name="tiles.parent_profile" path="/user_home_frame.jsp">
+        <put name="cover" value="tiles.parent_cover" />
+        <put name="navigation" value="/user_navigation.jsp" />
+        <put name="menu" value="/menu_login.jsp" />
+        <put name="body" value="/Parent/parent_profile.jsp" />
+        <put name="footer" value="/footer.jsp" />
+        </definition>
+
+
+        <!-- School Registration Form Tile -->
+        <definition name="tiles.school_reg" path="/School/school_reg_frame.jsp">
+        <put name="menu" value="/menu_NonLogin.jsp" />
+        <put name="body" value="/School/school_reg.jsp" />
+        <put name="footer" value="/footer.jsp" />
+
+        </definition>
+
+
+
+    <definition name="${YOUR_DEFINITION_HERE}">
+    </definition>
+
+</tiles-definitions>

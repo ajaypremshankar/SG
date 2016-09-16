@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+
+<form-validation>
+
+<!--
+     This is a minimal Validator form file with a couple of examples.
+-->
+
+    <global>
+
+        <!-- An example global constant
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^\d{5}\d*$</constant-value>
+        </constant>
+        end example-->
+
+    </global>
+
+    <formset>
+
+        <!-- An example form -->
+        <form name="logonForm">
+            <field
+                property="username"
+                depends="required">
+                    <arg key="logonForm.username"/>
+            </field>
+            <field
+                property="password"
+                depends="required,mask">
+                    <arg key="logonForm.password"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+        </form>
+
+
+        <!--Main Registration -->
+        <form name="Registration_Bean">
+            <field property="user_type" depends="required, mask">
+                <arg key="msg.user_type" />
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[0-9a-zA-Z]*$</var-value>
+                </var>
+            </field>
+         <field property="email" depends="email,required">
+             <arg key="msg.reg_id" />
+         </field>
+         <field property="fname" depends="required">
+             <arg key="msg.fname" />
+         </field>
+
+         <field property="lname" depends="required">
+             <arg key="msg.lname" />
+         </field>
+
+         <field property="day" depends="required,integer">
+             <arg key="msg.day" />
+         </field>
+
+         <field property="month" depends="required">
+             <arg key="msg.month" />
+         </field>
+
+         <field property="year" depends="required,integer">
+             <arg key="msg.year" />
+             
+         </field>
+         <field property="mob" depends="required,mask">
+             <arg key="msg.mob" />
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]{10}$</var-value>
+             </var>
+         </field>
+
+         <field property="password" depends="required,twofields,minlength">
+             <arg key="msg.password" />
+             <arg1 key="${minlength}" resource="false" />
+             <var>
+                <var-name>minlength</var-name>
+                <var-value>6</var-value>
+             </var>
+         </field>
+
+         <field property="confirm_password" depends="required,minlength">
+             <arg key="msg.conf_password" />
+             <arg1 key="${msg.minlength}" resource="false" />
+             <var>
+                 <var-name>msg.minlength</var-name>
+                 <var-value>6</var-value>
+             </var>
+         </field>
+
+         <field property="sex" depends="required,mask">
+             <arg key="msg.sex" />
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9a-zA-Z]*$</var-value>
+             </var>
+         </field>
+
+         <field property="school_name" depends="required">
+             <arg key="msg.school_name" />
+             
+         </field>
+
+        </form>
+
+
+        <!--Login Action Form -->
+        <form name="Login_Action_Bean">
+            <field property="email" depends="required,email">
+                <arg key="msg.email" />
+            </field>
+            <field property="password" depends="required">
+                <arg key="msg.password" />
+            </field>
+        </form>
+
+
+
+        <!-- Student Registration Completion/init Profile -->
+        <form name="Student_comp_reg_Bean">
+            <field property="parent_id" depends="required,email">
+                <arg key="msg.parent_id" />
+            </field>
+        </form>
+
+
+        <!-- Teacher Registration Completion/init profile -->
+        <form name="Teacher_comp_reg_Bean">
+            <field property="experience" depends="required,integer">
+                <arg key="msg.experience" />
+            </field>
+            <field property="education" depends="required">
+                <arg key="msg.education" />
+            </field>
+            <field property="subjects" depends="required,mask">
+                <msg name="mask" key="msg.mask_subjects" />
+                <arg key="msg.subjects" />
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z]{1}[a-zA-Z0-9]*([,]{1}[a-zA-Z]{1}[a-zA-Z0-9]*)*$</var-value>
+                </var>
+            </field>
+        </form>
+
+
+
+<!-- Parent Init Profile  -->
+        <form name="Parent_comp_reg_Bean">
+            <field property="occupation" depends="required">
+                <arg key="msg.occupation" />
+            </field>
+            <field property="education" depends="required">
+                <arg key="msg.education" />
+            </field>
+            <field property="spouse" depends="required">
+                <arg key="msg.spouse" />
+            </field>
+        </form>
+
+
+<!-- SCHOOL REGISTRATION FORM -->
+
+        <form name="School_reg_Bean">
+            <field property="school_name" depends="required">
+                <arg key="msg.school_name" />
+            </field>
+            <field property="website" depends="required, url">
+                <arg key="msg.website" />
+            </field>
+         <field property="school_email" depends="email,required">
+             <arg key="msg.school_email" />
+         </field>
+         <field property="school_phone" depends="required, mask">
+             <msg key="errors.invalid" name="mask" />
+             <arg key="msg.school_phone" />
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+         </field>
+
+         <field property="city" depends="required">
+             <arg key="msg.city" />
+         </field>
+
+         <field property="principal_name" depends="required, mask">
+             <arg key="msg.principal_name" />
+             <msg name="mask" key="errors.invalid" />
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[a-zA-Z]*$</var-value>
+             </var>
+         </field>
+         <field property="principal_mob" depends="required,mask">
+             <arg key="msg.mob" />
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]{10}$</var-value>
+             </var>
+         </field>
+
+         <field property="principal_email" depends="required, email">
+             <arg key="msg.principal_email" />
+         </field>
+
+         <field property="password" depends="required,twofields,minlength">
+             <arg key="msg.password" />
+             <arg1 key="${minlength}" resource="false" />
+             <var>
+                <var-name>minlength</var-name>
+                <var-value>6</var-value>
+             </var>
+         </field>
+
+         <field property="confirm_password" depends="required,minlength">
+             <arg key="msg.conf_password" />
+             <arg1 key="${msg.minlength}" resource="false" />
+             <var>
+                 <var-name>msg.minlength</var-name>
+                 <var-value>6</var-value>
+             </var>
+         </field>
+
+
+        </form>
+
+
+<!-- Student Profile Pic Upload   -->
+        <form name="Student_reg_pic_upload_Bean">
+            <field property="file" depends="required">
+                <arg key="msg.pic" />
+            </field>
+        </form>
+
+
+
+    </formset>
+
+    <!-- An example formset for another locale -->
+    <formset language="fr">
+
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^[0-9a-zA-Z]*$</constant-value>
+        </constant>
+
+        <!-- An example form -->
+        <form name="logonForm">
+            <field
+                property="username"
+                depends="required">
+                    <arg key="logonForm.username"/>
+            </field>
+            <field
+                property="password"
+                depends="required,mask">
+                    <arg key="logonForm.password"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+        </form>
+
+
+   </formset>
+
+</form-validation>

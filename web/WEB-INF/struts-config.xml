@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="Student_advance_info_update_Bean" type="Student.ActionForm.Student_advance_info_update_Bean"/>
+        <form-bean name="Basic_info_update_Bean" type="Global.ActionForm.Basic_info_update_Bean"/>
+        <form-bean name="Student_reg_pic_upload_Bean" type="Student.ActionForm.Student_reg_pic_upload_Bean"/>
+        <form-bean name="School_reg_Bean" type="School.ActionForm.School_reg_Bean"/>
+        <form-bean name="Parent_comp_reg_Bean" type="Parent.ActionForm.Parent_comp_reg_Bean"/>
+        <form-bean name="Teacher_comp_reg_Bean" type="Teacher.ActionForm.Teacher_comp_reg_Bean"/>
+        <form-bean name="Login_Action_Bean" type="Global.ActionForm.Login_Action_Bean"/>
+        <form-bean name="Student_comp_reg_Bean" type="Student.ActionForm.Student_comp_reg_Bean"/>
+        <form-bean name="Registration_Bean" type="Global.ActionForm.Registration_Bean"/>
+    
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome"  path="/Welcome.php"/>
+    </global-forwards>
+
+    <action-mappings>
+
+        <!--Application StartUp Page-->
+        <action path="/landing_page" type="Global.Action.Login_Session_Verify_Action">
+            <forward name="success" path="tiles.landing" />
+            <forward name="teacher" path="tiles.teacher_home" />
+            <forward name="student" path="tiles.student_home" />
+            <forward name="parent" path="tiles.parent_home" />
+        </action>
+        
+        
+        <!-- Action On User Registration Form on Landing Page -->
+        <action input="tiles.registration" name="Registration_Bean" path="/register" scope="session" type="Global.Action.Registration_Action" validate="false" >
+            <forward name="success" path="tiles.initial_page" />
+            <forward name="student" path="tiles.student_initial_page" />
+            <forward name="teacher" path="tiles.teacher_initial_page" />
+            <forward name="parent" path="tiles.parent_initial_page" />
+           <!-- <exception type="java.sql.SQLException" key="error.id.exists" path="tiles.landing"></exception> -->
+        </action>
+
+
+        <!-- Clicked On Login Link -->
+        <action path="/login" type="Global.Action.Login_Session_Verify_Action">
+            <forward name="success" path="tiles.login" />
+            <forward name="student" path="tiles.user_home" />
+            <forward name="teacher" path="tiles.user_home" />
+            <forward name="parent" path="tiles.user_home" />
+        </action>
+
+        <!--Action On Login Form-->
+        <action input="tiles.login" name="Login_Action_Bean" path="/login_action" scope="session" type="Global.Action.Login_Action_Action">
+            <forward name="success" path="tiles.user_home" />
+            <forward name="student" path="tiles.student_initial_page" />
+            <forward name="teacher" path="tiles.teacher_initial_page" />
+            <forward name="parent" path="tiles.parent_initial_page" />
+            <forward name="home_student" path="tiles.student_home" />
+            <forward name="home_teacher" path="tiles.teacher_home" />
+            <forward name="home_parent" path="tiles.parent_home" />
+
+        </action>
+
+        <!-- Action on Student/Teacher/Parent Comp Reg Form -->
+        <action input="tiles.student_initial_page" name="Student_comp_reg_Bean" path="/student_comp_reg" scope="session" type="Student.Action.Student_comp_reg_Action" validate="true">
+            <forward name="success" path="tiles.student_home" />
+        </action>
+
+        <action input="tiles.teacher_initial_page" name="Teacher_comp_reg_Bean" path="/teacher_comp_reg" scope="session" type="Teacher.Action.Teacher_comp_reg_Action">
+            <forward name="success" path="tiles.teacher_home" />
+        </action>
+
+        <action input="tiles.parent_initial_page" name="Parent_comp_reg_Bean" path="/parent_comp_reg" scope="request" type="Parent.Action.Parent_comp_reg_Action">
+            <forward name="success" path="tiles.parent_home" />
+        </action>
+        
+
+        <!-- Clicked on make Your School Global-->
+        <action input="tiles.landing" path="/school_reg_form" type="Global.Action.Login_Session_Verify_Action" validate="false">
+            <forward name="success" path="tiles.school_reg" />    
+        </action>
+
+        <!-- Action on School Registration Form -->
+        <action input="tiles.school_reg" name="School_reg_Bean" path="/school_reg_action" scope="session" type="School.Action.School_reg_Action">
+            <forward name="success" path="tiles.school_reg" />
+        </action>
+
+        <!-- Logout Action -->
+        <action path="/logout" type="Global.Action.Logout_Action">
+            <forward name="success" path="tiles.landing" />
+        </action>
+
+        
+        <!-- Registartion Page --> 
+        <action path="/registration" input="tiles.registration" type="Global.Action.Registration">
+            <forward name="success" path="tiles.registration" />
+        </action>
+        
+        <!-- Student/Teacher/Parent Profile Page --> 
+        <action path="/profile" type="Global.Action.Profile_Action">
+            <forward name="student_profile" path="tiles.student_profile" />
+            <forward name="teacher_profile" path="tiles.teacher_profile" />
+            <forward name="parent_profile" path="tiles.parent_profile" />
+        </action>
+        
+        <!-- Student Home On menu --> 
+        <action path="/home" type="Global.Action.Home_Action">
+            <forward name="student" path="tiles.student_home" />
+            <forward name="teacher" path="tiles.teacher_home" />
+            <forward name="parent" path="tiles.parent_profile" />
+        </action>
+        
+        <!-- Basic Info Update On Profile --> 
+        <action name="Basic_info_update_Bean" path="/basic_info_update_action" scope="request" type="Global.Action.Basic_info_update_Action" validate="false">
+            <forward name="student_success" path="tiles.student_profile" />
+            <forward name="teacher_success" path="tiles.teacher_profile" />
+            <forward name="parent_success" path="tiles.parent_profile" />
+        </action>
+        
+        
+        <!-- Student Advance Profile Edit --> 
+        <action name="Student_advance_info_update_Bean" path="/student_advance_info_update_action" scope="request" type="Student.Action.Student_advance_info_update_Action" validate="false"/>
+
+
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
